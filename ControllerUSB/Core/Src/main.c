@@ -20,7 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
-#include "usb_device.h"
+#include "Usb_handler.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -59,7 +59,7 @@ UART_HandleTypeDef huart1;
 SDRAM_HandleTypeDef hsdram1;
 
 /* Definitions for UsbReceiver */
-osThreadId_t UsbReceiverHandle;
+osThreadId_t UsbReceiver;
 const osThreadAttr_t UsbReceiver_attributes = {
   .name = "UsbReceiver",
   .priority = (osPriority_t) osPriorityNormal,
@@ -80,7 +80,6 @@ static void MX_LTDC_Init(void);
 static void MX_SPI5_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_USART1_UART_Init(void);
-void StartUsbReceiver(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -152,7 +151,7 @@ int main(void)
 
   /* Create the thread(s) */
   /* creation of UsbReceiver */
-  UsbReceiverHandle = osThreadNew(StartUsbReceiver, NULL, &UsbReceiver_attributes);
+  UsbReceiver = osThreadNew(StartUsbReceiver, NULL, &UsbReceiver_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -667,26 +666,6 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
-
-/* USER CODE BEGIN Header_StartUsbReceiver */
-/**
-  * @brief  Function implementing the UsbReceiver thread.
-  * @param  argument: Not used
-  * @retval None
-  */
-/* USER CODE END Header_StartUsbReceiver */
-void StartUsbReceiver(void *argument)
-{
-  /* init code for USB_DEVICE */
-  MX_USB_DEVICE_Init();
-  /* USER CODE BEGIN 5 */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END 5 */
-}
 
 /**
   * @brief  Period elapsed callback in non blocking mode
