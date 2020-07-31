@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ControllerUSB</name>
+	<name>ControlerUSB</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -30,4 +30,26 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>Core/Inc/RingBuffer.h</name>
+			<type>1</type>
+			<location>C:/Projekty/Stm32/ControlerUSB/Core/Inc/RingBuffer.h</location>
+		</link>
+		<link>
+			<name>Core/Inc/Usb_handler.h</name>
+			<type>1</type>
+			<location>C:/Projekty/Stm32/ControlerUSB/Core/Inc/Usb_handler.h</location>
+		</link>
+		<link>
+			<name>Core/Src/RingBuffer.c</name>
+			<type>1</type>
+			<location>C:/Projekty/Stm32/ControlerUSB/Core/Src/RingBuffer.c</location>
+		</link>
+		<link>
+			<name>Core/Src/Usb_handler.c</name>
+			<type>1</type>
+			<location>C:/Projekty/Stm32/ControlerUSB/Core/Src/Usb_handler.c</location>
+		</link>
+	</linkedResources>
 </projectDescription>
