@@ -8,12 +8,13 @@
 #include "stm32f4xx_hal.h"
 #include "usbd_cdc_if.h"
 #include "usb_device.h"
+#include "RingBuffer.h"
 
 #ifndef INC_USB_HANDLER_H_
 #define INC_USB_HANDLER_H_
 
-#define USB_RECEIVE_BUFFER_SIZE 40
-#define USB_TRANSMIT_BUFFER_SIZE 40
+#define USB_RECEIVE_BUFFER_SIZE 5
+#define USB_TRANSMIT_BUFFER_SIZE 5
 
 typedef struct usbQueueElement
 {
@@ -27,8 +28,7 @@ typedef struct usbQueue
 }usbQueue_t;
 
 void StartUsbReceiver(void * atributes);
-
-void Set_fReceivedData(uint8_t val);
-uint8_t Get_fReceivedData(void);
+void EchoRingBuffer(ringBuffer_t * ringBuffer);
+ringBuffer_t * Get_gRingBufferReceive(void);
 
 #endif /* INC_USB_HANDLER_H_ */
