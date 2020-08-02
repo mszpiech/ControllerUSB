@@ -267,17 +267,6 @@ static int8_t CDC_Receive_HS(uint8_t* Buf, uint32_t *Len)
   /* USER CODE BEGIN 11 */
   USBD_CDC_SetRxBuffer(&hUsbDeviceHS, &Buf[0]);
   USBD_CDC_ReceivePacket(&hUsbDeviceHS);
-
-  ringBuffer_t * ringBuffer = Get_gRingBufferReceive();
-
-  if (AddToBuffer(ringBuffer,Buf,*Len) == *Len)
-  {
-	  ringBuffer->status = BUFFER_OK;
-  }
-  else
-  {
-	  ringBuffer->status = TO_BIG_FRAME;
-  }
   return (USBD_OK);
   /* USER CODE END 11 */
 }

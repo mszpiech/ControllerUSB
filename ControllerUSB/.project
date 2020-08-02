@@ -30,16 +30,4 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>Core/Inc/RingBuffer.h</name>
-			<type>1</type>
-			<location>C:/Projekty/ControllerUSB/ControllerUSB/Core/Inc/RingBuffer.h</location>
-		</link>
-		<link>
-			<name>Core/Src/RingBuffer.c</name>
-			<type>1</type>
-			<location>C:/Projekty/Stm32/ControlerUSB/Core/Src/RingBuffer.c</location>
-		</link>
-	</linkedResources>
 </projectDescription>

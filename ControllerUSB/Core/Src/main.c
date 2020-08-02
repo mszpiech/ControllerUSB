@@ -33,7 +33,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,7 +53,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint8_t znak;
+uint8_t komunikat[20];
+uint8_t komunikat_size;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -66,6 +68,7 @@ void MX_FREERTOS_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+
 /* USER CODE END 0 */
 
 /**
@@ -75,7 +78,6 @@ void MX_FREERTOS_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -105,7 +107,7 @@ int main(void)
   MX_TIM1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_UART_Receive_IT(&huart1, &znak, 1);
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -179,7 +181,82 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void clearCS(void);
+void clearCS(void)
+{
+	HAL_GPIO_WritePin(CS1_GPIO_Port, CS1_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(CS2_GPIO_Port, CS2_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(CS3_GPIO_Port, CS3_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(CS4_GPIO_Port, CS4_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(CS5_GPIO_Port, CS5_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(CS6_GPIO_Port, CS6_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(CS7_GPIO_Port, CS7_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(CS8_GPIO_Port, CS8_Pin, GPIO_PIN_RESET);
+}
 
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if(huart->Instance == USART1)
+	{
+		clearCS();
+		if (znak == '1')
+		{
+			HAL_GPIO_WritePin(CS1_GPIO_Port, CS1_Pin, GPIO_PIN_SET);
+			sprintf(komunikat,"1\n");
+			komunikat_size = 2;
+		}
+		else if(znak == '2')
+		{
+			HAL_GPIO_WritePin(CS2_GPIO_Port, CS2_Pin, GPIO_PIN_SET);
+			sprintf(komunikat,"2\n");
+			komunikat_size = 2;
+		}
+		else if(znak == '3')
+		{
+			HAL_GPIO_WritePin(CS3_GPIO_Port, CS3_Pin, GPIO_PIN_SET);
+			sprintf(komunikat,"3\n");
+			komunikat_size = 2;
+		}
+		else if(znak == '4')
+		{
+			HAL_GPIO_WritePin(CS4_GPIO_Port, CS4_Pin, GPIO_PIN_SET);
+			sprintf(komunikat,"4\n");
+			komunikat_size = 2;
+		}
+		else if(znak == '5')
+		{
+			HAL_GPIO_WritePin(CS5_GPIO_Port, CS5_Pin, GPIO_PIN_SET);
+			sprintf(komunikat,"5\n");
+			komunikat_size = 2;
+		}
+		else if(znak == '6')
+		{
+			HAL_GPIO_WritePin(CS6_GPIO_Port, CS6_Pin, GPIO_PIN_SET);
+			sprintf(komunikat,"6\n");
+			komunikat_size = 2;
+		}
+		else if(znak == '7')
+		{
+			HAL_GPIO_WritePin(CS7_GPIO_Port, CS7_Pin, GPIO_PIN_SET);
+			sprintf(komunikat,"7\n");
+			komunikat_size = 2;
+		}
+		else if(znak == '8')
+		{
+			HAL_GPIO_WritePin(CS8_GPIO_Port, CS8_Pin, GPIO_PIN_SET);
+			sprintf(komunikat,"8\n");
+			komunikat_size = 2;
+		}
+		else
+		{
+			sprintf(komunikat,"?\n");
+			komunikat_size = 2;
+		}
+		HAL_UART_Transmit_IT(&huart1, komunikat, komunikat_size);
+		HAL_UART_Receive_IT(&huart1, &znak, 1);
+	}
+
+}
 /* USER CODE END 4 */
 
 /**
